@@ -20,6 +20,7 @@ import {
     Tooltip,
 } from "chart.js";
 import { useEffect, useState } from "react";
+import Header from "@/components/Header";
 
 import { fetchReceipts } from "./queries/get-receipts";
 import ReceiptStatistics from "@/components/shopping-summary";
@@ -55,6 +56,12 @@ export default function Home() {
             localStorage.setItem("ah_tokens", JSON.stringify(tokens));
         }
     }, [tokens]);
+
+    // Add the logout function in Home
+const logout = () => {
+    setTokens(null);
+    localStorage.removeItem("ah_tokens");
+};
 
     const processMonthlyData = (receipts: Receipt[]): MonthlySpending[] => {
         const monthlyMap = new Map<string, MonthlySpending>();
@@ -109,9 +116,7 @@ export default function Home() {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">
-                Albert Heijn Receipts Viewer
-            </h1>
+            <Header onLogout={logout} loggedIn={!!tokens} /> 
 
             {!tokens ? (
                 <LoginForm onLogin={(newTokens) => setTokens(newTokens)} />
