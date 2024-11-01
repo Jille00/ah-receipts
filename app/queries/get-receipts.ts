@@ -1,7 +1,10 @@
 import { AuthTokens } from "@/types/AuthTokens";
 import { fetchWithRefresh } from "@/utils/fetch-refresh";
 
-export const fetchReceipts = async (tokens: AuthTokens, setTokens: (tokens: AuthTokens | null) => void) => {
+export const fetchReceipts = async (
+    tokens: AuthTokens,
+    setTokens: (tokens: AuthTokens | null) => void,
+) => {
     if (!tokens) return;
 
     try {

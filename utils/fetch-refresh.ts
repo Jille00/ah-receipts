@@ -1,6 +1,10 @@
 import { AuthTokens } from "@/types/AuthTokens";
 
-export const fetchWithRefresh = async (url: string, tokens: AuthTokens, setTokens: (tokens: AuthTokens | null) => void) => {
+export const fetchWithRefresh = async (
+    url: string,
+    tokens: AuthTokens,
+    setTokens: (tokens: AuthTokens | null) => void,
+) => {
     if (!tokens) return null;
 
     try {
@@ -30,7 +34,10 @@ export const fetchWithRefresh = async (url: string, tokens: AuthTokens, setToken
     }
 };
 
-const refreshAccessToken = async (tokens: AuthTokens, setTokens: (tokens: AuthTokens | null) => void) => {
+const refreshAccessToken = async (
+    tokens: AuthTokens,
+    setTokens: (tokens: AuthTokens | null) => void,
+) => {
     if (!tokens?.refresh_token) return null;
 
     try {
@@ -46,7 +53,7 @@ const refreshAccessToken = async (tokens: AuthTokens, setTokens: (tokens: AuthTo
                     clientId: "appie",
                     refreshToken: tokens.refresh_token,
                 }),
-            }
+            },
         );
 
         if (!response.ok) {
