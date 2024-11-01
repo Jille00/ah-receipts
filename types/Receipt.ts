@@ -22,5 +22,22 @@ export interface DetailedReceipt {
         value?: string;
         label?: string;
         price?: string;
+        alignment?: "LEFT" | "CENTER" | "RIGHT";
+        isBold?: boolean;
+        style?: string; // for items like "ah-logo"
+        text?: string; // for subtotal text
+        first?: string; // for four-text-column items
+        second?: string;
+        third?: string;
+        fourth?: string;
+        left?: string; // for VAT and similar fields
+        center?: string;
+        right?: string;
+        store?: number; // for tech-info fields
+        lane?: number;
+        transaction?: number;
+        operator?: string | null;
     }>;
+    storeId?: number;
+    transactionMoment?: string;
 }

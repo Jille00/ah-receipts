@@ -81,42 +81,106 @@ export default function ReceiptList({
 
             {/* Receipt Details Modal */}
             <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                <DialogContent className="max-w-md">
+                <DialogContent className="h-[80vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle>Receipt Details</DialogTitle>
                         <DialogClose onClick={closeModal} />
                     </DialogHeader>
                     <div className="space-y-2">
                         {selectedReceipt?.receiptUiItems.map((item, index) => {
-                            if (item.type === "product" && item.description) {
-                                return (
-                                    <div
-                                        key={index}
-                                        className="flex justify-between"
-                                    >
-                                        <span>
-                                            {item.quantity &&
-                                                `${item.quantity}x `}
-                                            {item.description}
-                                        </span>
-                                        {item.amount && (
+                            switch (item.type) {
+                                case "ah-logo":
+                                    return (
+                                        <div key={index} className="text-center text-lg font-semibold">
+                                            {item.style}
+                                        </div>
+                                    );
+                                case "text":
+                                    return (
+                                        <p
+                                            key={index}
+                                            className={`text-${
+                                                (item.alignment?.toLowerCase() || "left")
+                                            } ${item.isBold ? "font-bold" : ""}`}
+                                        >
+                                            {item.value}
+                                        </p>
+                                    );
+                                case "spacer":
+                                    return <div key={index} className="my-2" />;
+                                case "products-header":
+                                    return (
+                                        <p key={index} className="text-lg font-semibold border-t pt-2">
+                                            Products
+                                        </p>
+                                    );
+                                case "divider":
+                                    return <hr key={index} className="border-gray-300" />;
+                                case "product":
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex justify-between items-center text-sm"
+                                        >
+                                            <span>
+                                                {item.quantity && `${item.quantity}x `}
+                                                {item.description}
+                                            </span>
+                                            {item.amount && <span>{item.amount}</span>}
+                                        </div>
+                                    );
+                                case "subtotal":
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex justify-between font-semibold border-t pt-2"
+                                        >
+                                            <span>{item.text}</span>
                                             <span>{item.amount}</span>
-                                        )}
-                                    </div>
-                                );
+                                        </div>
+                                    );
+                                case "total":
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="flex justify-between text-lg font-bold border-t border-b py-2"
+                                        >
+                                            <span>{item.label}</span>
+                                            <span>{item.price}</span>
+                                        </div>
+                                    );
+                                case "four-text-column":
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="grid grid-cols-4 gap-2 text-xs text-gray-700"
+                                        >
+                                            <span>{item.first}</span>
+                                            <span>{item.second}</span>
+                                            <span>{item.third}</span>
+                                            <span>{item.fourth}</span>
+                                        </div>
+                                    );
+                                case "vat":
+                                    return (
+                                        <div key={index} className="flex justify-between text-sm">
+                                            <span>{item.left}</span>
+                                            <span>{item.center}</span>
+                                            <span>{item.right}</span>
+                                        </div>
+                                    );
+                                case "tech-info":
+                                    return (
+                                        <div key={index} className="text-xs text-gray-500 mt-2">
+                                            <p>Store: {item.store}</p>
+                                            <p>Lane: {item.lane}</p>
+                                            <p>Transaction: {item.transaction}</p>
+                                            {item.operator && <p>Operator: {item.operator}</p>}
+                                        </div>
+                                    );
+                                default:
+                                    return null;
                             }
-                            if (item.type === "total" && item.label) {
-                                return (
-                                    <div
-                                        key={index}
-                                        className="flex justify-between font-bold"
-                                    >
-                                        <span>{item.label}</span>
-                                        <span>{item.price}</span>
-                                    </div>
-                                );
-                            }
-                            return null;
                         })}
                     </div>
                 </DialogContent>
