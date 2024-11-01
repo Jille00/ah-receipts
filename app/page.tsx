@@ -4,7 +4,7 @@ import LoginForm from "@/components/login-form";
 import MonthlySpendingOverview from "@/components/monthly-spending-overview";
 import MonthlyVisitCount from "@/components/monthly-visit-count";
 import ReceiptList from "@/components/receipts-list";
-import ShoppingSummary from "@/components/shopping-summary";
+import ShoppingSummary from "@/components/shopping-summary-month";
 import { AuthTokens } from "@/types/AuthTokens";
 import { MonthlySpending } from "@/types/MonthlyData";
 import { DetailedReceipt, Receipt } from "@/types/Receipt";
@@ -23,6 +23,8 @@ import {
 import { useEffect, useState } from "react";
 
 import { fetchReceipts } from "./queries/get-receipts";
+import ReceiptStatistics from "@/components/shopping-summary";
+import ShoppingSummaryMonth from "@/components/shopping-summary-month";
 
 ChartJS.register(
     CategoryScale,
@@ -124,7 +126,9 @@ export default function Home() {
                         <MonthlyVisitCount monthlyData={monthlyData} />
 
                         {/* Shopping Summary */}
-                        <ShoppingSummary monthlyData={monthlyData} />
+                        <ShoppingSummaryMonth monthlyData={monthlyData} />
+
+                        <ReceiptStatistics receipts={receipts} />
                     </div>
 
                     {/* Receipts List and Details */}
