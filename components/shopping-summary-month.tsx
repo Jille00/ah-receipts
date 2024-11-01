@@ -6,10 +6,7 @@ const ShoppingSummaryMonth = ({ monthlyData }: { monthlyData: MonthlySpending[] 
     if (monthlyData.length === 0) {
         return null;
     }
-    const totalSpent = monthlyData.reduce((sum, month) => sum + month.total, 0);
-    const totalSaved = monthlyData.reduce((sum, month) => sum + month.discount, 0);
     const totalVisits = monthlyData.reduce((sum, month) => sum + month.count, 0);
-    const avgPerVisit = totalSpent / totalVisits;
 
     const highestSpent = Math.max(...monthlyData.map((month) => month.total));
     const highestDiscount = Math.max(...monthlyData.map((month) => month.discount));

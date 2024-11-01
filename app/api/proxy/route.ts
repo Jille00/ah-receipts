@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const AH_BASE_URL = "https://api.ah.nl";
-const LOGIN_URL = "https://login.ah.nl";
 
 export async function POST(request: NextRequest) {
     const body = await request.json();

@@ -4,10 +4,9 @@ import LoginForm from "@/components/login-form";
 import MonthlySpendingOverview from "@/components/monthly-spending-overview";
 import MonthlyVisitCount from "@/components/monthly-visit-count";
 import ReceiptList from "@/components/receipts-list";
-import ShoppingSummary from "@/components/shopping-summary-month";
 import { AuthTokens } from "@/types/AuthTokens";
 import { MonthlySpending } from "@/types/MonthlyData";
-import { DetailedReceipt, Receipt } from "@/types/Receipt";
+import { Receipt } from "@/types/Receipt";
 import { formatMonth } from "@/utils/formatting";
 import {
     BarElement,

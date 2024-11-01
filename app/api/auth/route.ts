@@ -81,8 +81,9 @@ export async function POST(req: Request) {
                         timeout: 5000,
                     }),
                 ]);
-            } catch (e) {
+            } catch (error) {
                 // Timeout is okay
+                console.log("No captcha or navigation, continuing...", error);
             }
 
             // Check if captcha is present
